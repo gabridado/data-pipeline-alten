@@ -218,3 +218,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Credenciales: NUNCA al repo
+keys/
+*.json
+
+# Airflow
+airflow/logs/
+airflow/keys/
+airflow/config/
+airflow/plugins/
