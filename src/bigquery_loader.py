@@ -44,6 +44,15 @@ class BigQueryLoader:
         logger.info("Cargadas %d filas en %s", job.output_rows, destination)
         return job.output_rows
 
+    def count_rows(self, day: date) -> int:
+        # Filas cargadas para un día: se usa para validar la carga
+        query = f"SELECT COUNT(*) AS n FROM `{self.table_id}` WHERE fecha = @day"
+        job_config = bigquery.QueryJobConfig(
+            query_parameters=[bigquery.ScalarQueryParameter("day", "DATE", day)]
+        )
+        result = self.client.query(query, job_config=job_config, location=self.location).result()
+        return next(iter(result)).n
+
     def _ensure_dataset(self) -> None:
         dataset = bigquery.Dataset(self.dataset_id)
         dataset.location = self.location

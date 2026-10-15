@@ -226,3 +226,5 @@ keys/
 # Airflow
 airflow/logs/
 airflow/keys/
+airflow/config/
+airflow/plugins/
